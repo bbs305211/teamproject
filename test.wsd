@@ -1,0 +1,28 @@
+@startuml
+
+actor Customer
+participant "Reservation System" as System
+actor Receptionist
+actor Barber
+
+Customer -> System: Open reservation system
+Customer -> System: Browse available hairdressing service times
+Customer -> System: Select suitable time and make a reservation
+System -> Customer: Confirm successful reservation
+Customer -> Receptionist: Arrive at hairdressing shop on time
+Customer -> Receptionist: Provide personal information for verification
+Receptionist -> System: Update queue information
+Receptionist -> Customer: Inform about position and estimated wait time
+Barber -> Receptionist: Provide hairdressing service to the customer
+
+alt Exception: Reservation failed
+System -> Customer: Notify reservation failure
+Customer -> System: Select alternative available time
+System -> Customer: Confirm successful reservation
+
+alt Exception: Delay
+Receptionist -> Customer: Notify about service delay
+Customer -> Receptionist: Choose alternative solution
+
+end
+@enduml
